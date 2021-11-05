@@ -1,9 +1,11 @@
-package src;
+package src.main;
 
 public class Board
 {
     // instance variables
     int[][] board;
+
+
 
     // constructor for objects in Board class
     public Board(int rows, int columns) {
@@ -21,4 +23,15 @@ public class Board
     public void set(int row, int col, int value) {
         board[row][col] = value;
     }
+
+    // the getRows method returns the number of rows (the height) of the board
+    public int getRows() {
+        return board.length;
+    }
+
+    // the getColums method returns the number of columns (the width) of teh board
+    public int getColumns() {
+        return board[0].length;
+    }
+
 }
