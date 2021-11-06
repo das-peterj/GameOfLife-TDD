@@ -13,7 +13,7 @@ public class Life {
                 int randValue = (int) (Math.random() * 3);
 
                 if (randValue == 0) {               // 33% chance of having one live cell
-                    board.set(r,c,1);
+                    board.set(r, c,1);
                 }
             }
         }
@@ -25,7 +25,7 @@ public class Life {
     public static void displayBoard(Board board) {
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
-                if (board.get(r,c) == 0) {
+                if (board.get(r, c) == 0) {
                     System.out.print(".");
                 } else if (board.get(r,c) == 1) {
                     System.out.print("0");
@@ -35,25 +35,45 @@ public class Life {
         }
     }
 
-    // the slow method sleep to slow the display down
-    private static void slow(int TIME_DELAY) {
-        try {
-            Thread.sleep(TIME_DELAY);
-        } catch(InterruptedException exception) {
-            Thread.currentThread().interrupt();
+
+
+//   method calcNextNeighbour that actually handles the rules of Conways Game of Life.
+//   1. Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.
+//   2. Any live cell with more than three live neighbors dies, as if by overcrowding.
+//   3. Any live cell with two or three live neighbors lives on to the next generation.
+//   4. Any dead cell with exactly three live neighbors becomes a live cell.
+    public static void calcNextNeighbour(Board board, Board nextBoard) {
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLUMNS; c++) {
+                if (board.get(r, c) == 1 && countNeighbours(r, c, board) < 2) { // rule 1
+                    nextBoard.set(r, c, 0);
+                }
+                else if ( board.get(r, c) == 1 && countNeighbours(r, c, board) > 3) { // rule 2
+                    nextBoard.set(r, c, 0);
+                }
+                else if (board.get(r, c) == 1 && countNeighbours(r, c, board) < 4) { // rule 3
+                    nextBoard.set(r, c, 1);
+                }
+                else if (board.get(r, c) == 0 && countNeighbours(r, c, board) == 3) { // rule 4
+                    nextBoard.set(r, c, 1);
+                }
+
+            }
         }
     }
 
-    private static void clearConsole() {
-        System.out.println("\033[H\033[2J");
-        System.out.flush();
-    }
+
+
+    // the method countNeighbours counts the eight cells around a specific cell.
+    // useful to make sure it doesnt count outside of the bounds of the awway and
+    // not to count the specific cell in mind
+
+
+
 
     public static void main(String[] args) {
         Board board = new Board(ROWS, COLUMNS);
         initBoard(board);
-        slow(TIME_DELAY);
         displayBoard(board);
-        clearConsole();
     }
 }
