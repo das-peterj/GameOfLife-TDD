@@ -1,7 +1,7 @@
 public class Life {
     // setting static int variables for defining the board
-    public static final int ROWS = 25;
-    public static final int COLUMNS = 80;
+    public static final int ROWS = 10;
+    public static final int COLUMNS = 25;
     public static final int TIME_DELAY = 500;
 
 
@@ -10,7 +10,7 @@ public class Life {
         // r = rows || c = columns
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
-                int randValue = (int) (Math.random()*3);
+                int randValue = (int) (Math.random() * 3);
 
                 if (randValue == 0) {               // 33% chance of having one live cell
                     board.set(r,c,1);
@@ -26,9 +26,9 @@ public class Life {
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
                 if (board.get(r,c) == 0) {
-                    System.out.println(".");
+                    System.out.print(".");
                 } else if (board.get(r,c) == 1) {
-                    System.out.println("*");
+                    System.out.print("0");
                 }
             }
             System.out.println();
@@ -52,6 +52,8 @@ public class Life {
     public static void main(String[] args) {
         Board board = new Board(ROWS, COLUMNS);
         initBoard(board);
+        slow(TIME_DELAY);
         displayBoard(board);
+        clearConsole();
     }
 }

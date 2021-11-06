@@ -35,7 +35,7 @@ public class Board
 
 //    the toString method returns a string that can be printed
 //    to display the grid
-    public String toString() {
+    public String toStringBoard() {
         String results = "";
 
         // r = rows || c = columns
