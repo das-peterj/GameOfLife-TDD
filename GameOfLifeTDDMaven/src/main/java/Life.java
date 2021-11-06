@@ -57,6 +57,9 @@ public class Life {
                 else if (board.get(r, c) == 0 && countNeighbours(r, c, board) == 3) { // rule 4
                     nextBoard.set(r, c, 1);
                 }
+                else {
+                    nextBoard.set(r, c, 0); // if none of the rules above happens, this is a "failsafe".
+                }
 
             }
         }
@@ -67,7 +70,19 @@ public class Life {
     // the method countNeighbours counts the eight cells around a specific cell.
     // useful to make sure it doesnt count outside of the bounds of the awway and
     // not to count the specific cell in mind
+    public static int countNeighbours(int row, int column, Board board) {
+        int counter = 0;
 
+        for (int r = row - 1; r <= row + 1; r++) {
+            for (int c = column -1; c <= column + 1; c++) {
+                if (r >= 0 && r < ROWS && c >= 0 && c < COLUMNS &&
+                !(r == row && c == column) && board.get(r, c) == 1) {
+                    counter = counter + 1;
+                }
+            }
+        }
+        return counter;
+    }
 
 
 
@@ -75,5 +90,7 @@ public class Life {
         Board board = new Board(ROWS, COLUMNS);
         initBoard(board);
         displayBoard(board);
+        // make this a test later on ?
+        System.out.println(countNeighbours(0, 0, board) + " live neighbour(s).");
     }
 }
