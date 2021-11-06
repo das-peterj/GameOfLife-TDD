@@ -1,5 +1,3 @@
-package src.main;
-
 public class Board
 {
     // instance variables
@@ -29,9 +27,25 @@ public class Board
         return board.length;
     }
 
-    // the getColums method returns the number of columns (the width) of teh board
+    // the getColumns method returns the number of columns (the width) of teh board
     public int getColumns() {
         return board[0].length;
+    }
+
+
+//    the toString method returns a string that can be printed
+//    to display the grid
+    public String toString() {
+        String results = "";
+
+        // r = rows || c = columns
+        for (int r = 0; r < getRows(); r++) {
+            for (int c = 0; c < getColumns(); c++)  {
+                results += String.valueOf(board[r][c]);
+            }
+            results += "\n";
+        }
+        return results;
     }
 
 }
