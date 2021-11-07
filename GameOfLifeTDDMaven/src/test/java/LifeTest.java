@@ -13,4 +13,10 @@ public class LifeTest {
         boolean test = Life.displayTestBoard(board);
         assertTrue(test);
     }
+
+    @Test
+    void chosenCellShouldHaveThreeAliveNeighbours() {
+        Life.initTestBoard(board);
+        assertEquals(Life.countNeighbours(0, 0, board), 3);
+    }
 }
