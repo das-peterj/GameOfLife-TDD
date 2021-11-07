@@ -27,8 +27,6 @@ public class Life {
         }
     }
 
-
-
     // the displayBoard method displays the board.
     public static void displayBoard(Board board) {
         for (int r = 0; r < ROWS; r++) {
@@ -41,6 +39,20 @@ public class Life {
             }
             System.out.println();
         }
+    }
+
+    public static boolean displayTestBoard(Board board) {
+        for (int r = 0; r < LifeTest.test_ROWS; r++) {
+            for (int c = 0; c < LifeTest.test_COLUMNS; c++) {
+                if (board.get(r, c) == 0) {
+                    System.out.print(".");
+                } else if (board.get(r, c) == 1) {
+                    System.out.print("0");
+                }
+            }
+            System.out.println();
+        }
+        return true;
     }
 
 //   method calcNextNeighbour that actually handles the rules of Conways Game of Life.

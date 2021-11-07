@@ -7,10 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BoardTest {
     public static final int test_ROWS = 2;
     public static final int test_COLUMNS = 2;
+    public Board board = new Board(test_ROWS, test_COLUMNS);
 
     @Test
     void shouldCompareBoardsColumnsIsTheSameHeight() {
-        Board board = new Board(test_ROWS, test_COLUMNS);
+
         Board secondBoard = new Board(test_ROWS, test_COLUMNS);
 
         assertEquals(board.getColumns(), secondBoard.getColumns());
@@ -18,7 +19,6 @@ public class BoardTest {
 
     @Test
     void shouldCompareBoardsRowsIsTheSameHeight() {
-        Board board = new Board(test_ROWS, test_COLUMNS);
         Board secondBoard = new Board(test_ROWS, test_COLUMNS);
 
         assertEquals(board.getRows(), secondBoard.getRows());
@@ -26,7 +26,6 @@ public class BoardTest {
 
     @Test
     void allCellsShouldBeAlive() {
-        Board board = new Board(test_ROWS, test_COLUMNS);
         Life.initTestBoard(board);
         Board secondBoard = new Board(test_ROWS, test_COLUMNS);
         Life.initTestBoard(secondBoard);
