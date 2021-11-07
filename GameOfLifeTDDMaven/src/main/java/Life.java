@@ -45,16 +45,17 @@ public class Life {
     public static void calcNextNeighbour(Board board, Board nextBoard) {
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
-                if (board.get(r, c) == 1 && countNeighbours(r, c, board) < 2) { // rule 1
+                int countNeighbours = countNeighbours(r, c, board);
+                if (board.get(r, c) == 1 && countNeighbours < 2) { // rule 1
                     nextBoard.set(r, c, 0);
                 }
-                else if ( board.get(r, c) == 1 && countNeighbours(r, c, board) > 3) { // rule 2
+                else if ( board.get(r, c) == 1 && countNeighbours > 3) { // rule 2
                     nextBoard.set(r, c, 0);
                 }
-                else if (board.get(r, c) == 1 && countNeighbours(r, c, board) < 4) { // rule 3
+                else if (board.get(r, c) == 1 && countNeighbours < 4) { // rule 3
                     nextBoard.set(r, c, 1);
                 }
-                else if (board.get(r, c) == 0 && countNeighbours(r, c, board) == 3) { // rule 4
+                else if (board.get(r, c) == 0 && countNeighbours == 3) { // rule 4
                     nextBoard.set(r, c, 1);
                 }
                 else {
@@ -94,16 +95,17 @@ public class Life {
         }
     }
 
-    private static void slow(int TIME_DELAY) {
+    private static void slow() {
         try {
-            Thread.sleep(TIME_DELAY);
+            Thread.sleep(Life.TIME_DELAY);
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
         }
     }
 
     private static void clearConsole() {
-        System.out.println("\033[H\033[2J");
+        System.out.println("");
+        System.out.println("");
         System.out.flush();
     }
 
@@ -117,7 +119,7 @@ public class Life {
         for (int i = 0; i < 200; i++) {
             clearConsole();
             displayBoard(board);
-            slow(TIME_DELAY);
+            slow();
             calcNextNeighbour(board, nextBoard);
             copyCurrentBoardToNext(board, nextBoard);
         }
