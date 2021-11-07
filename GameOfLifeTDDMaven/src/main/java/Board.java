@@ -31,21 +31,4 @@ public class Board
     public int getColumns() {
         return board[0].length;
     }
-
-
-//    the toString method returns a string that can be printed
-//    to display the grid
-    public String toStringBoard() {
-        String results = "";
-
-        // r = rows || c = columns
-        for (int r = 0; r < getRows(); r++) {
-            for (int c = 0; c < getColumns(); c++)  {
-                results += String.valueOf(board[r][c]);
-            }
-            results += "\n";
-        }
-        return results;
-    }
-
 }

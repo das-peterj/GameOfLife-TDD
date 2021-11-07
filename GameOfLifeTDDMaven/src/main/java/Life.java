@@ -4,7 +4,6 @@ public class Life {
     public static final int COLUMNS = 80;
     public static final int TIME_DELAY = 200;
 
-
     // the initBoard method sets up the initial board
     public static void initBoard(Board board) {
         // r = rows || c = columns
@@ -19,6 +18,15 @@ public class Life {
         }
     }
 
+    public static void initTestBoard(Board board) {
+        // puts each cell in this 2x2 grid to alive
+        for (int r = 0; r < BoardTest.test_ROWS; r++) {
+            for (int c = 0; c < BoardTest.test_COLUMNS; c++) {
+                board.set(r, c,1);
+            }
+        }
+    }
+
 
 
     // the displayBoard method displays the board.
@@ -27,15 +35,13 @@ public class Life {
             for (int c = 0; c < COLUMNS; c++) {
                 if (board.get(r, c) == 0) {
                     System.out.print(".");
-                } else if (board.get(r,c) == 1) {
+                } else if (board.get(r, c) == 1) {
                     System.out.print("0");
                 }
             }
             System.out.println();
         }
     }
-
-
 
 //   method calcNextNeighbour that actually handles the rules of Conways Game of Life.
 //   1. Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.
@@ -66,10 +72,8 @@ public class Life {
         }
     }
 
-
-
     // the method countNeighbours counts the eight cells around a specific cell.
-    // useful to make sure it doesnt count outside of the bounds of the awway and
+    // useful to make sure it doesnt count outside of the bounds of the array and
     // not to count the specific cell in mind
     public static int countNeighbours(int row, int column, Board board) {
         int counter = 0;
