@@ -1,8 +1,8 @@
 public class Life {
     // setting static int variables for defining the board
-    public static final int ROWS = 10;
-    public static final int COLUMNS = 25;
-    public static final int TIME_DELAY = 500;
+    public static final int ROWS = 25;
+    public static final int COLUMNS = 80;
+    public static final int TIME_DELAY = 200;
 
 
     // the initBoard method sets up the initial board
@@ -84,13 +84,45 @@ public class Life {
         return counter;
     }
 
+    // the method copyCurrentBoardToNext copies the conditions of the current board and transfers it to the next board
+    // that way we can "play" the game and display the future generations of the game.
+    public static void copyCurrentBoardToNext(Board board, Board nextBoard) {
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLUMNS; c++) {
+                board.set(r, c, nextBoard.get(r, c));
+            }
+        }
+    }
 
+    private static void slow(int TIME_DELAY) {
+        try {
+            Thread.sleep(TIME_DELAY);
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private static void clearConsole() {
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+    }
 
     public static void main(String[] args) {
+
         Board board = new Board(ROWS, COLUMNS);
+        Board nextBoard = new Board(ROWS, COLUMNS);
         initBoard(board);
         displayBoard(board);
-        // make this a test later on ?
-        System.out.println(countNeighbours(0, 0, board) + " live neighbour(s).");
+
+        for (int i = 0; i < 200; i++) {
+            clearConsole();
+            displayBoard(board);
+            slow(TIME_DELAY);
+            calcNextNeighbour(board, nextBoard);
+            copyCurrentBoardToNext(board, nextBoard);
+        }
+
+//         make this a test later on ?
+//        System.out.println(countNeighbours(0, 0, board) + " live neighbour(s).");
     }
 }
