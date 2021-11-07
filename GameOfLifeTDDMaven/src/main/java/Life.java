@@ -1,26 +1,19 @@
 public class Life {
-    // setting static int variables for defining the board
     public static final int ROWS = 25;
     public static final int COLUMNS = 80;
     public static final int TIME_DELAY = 200;
-    static int test_rows = LifeTest.test_ROWS;
-    static int test_columns = LifeTest.test_COLUMNS;
 
-    // the initBoard method sets up the initial board
     public static void initBoard(Board board) {
-        // r = rows || c = columns
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
                 int randValue = (int) (Math.random() * 3);
-
-                if (randValue == 0) {               // 33% chance of having one live cell
+                if (randValue == 0) {
                     board.set(r, c,1);
                 }
             }
         }
     }
 
-    // the displayBoard method displays the board.
     public static boolean displayBoard(Board board, int ROWS, int COLUMNS) {
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
@@ -35,11 +28,6 @@ public class Life {
         return true;
     }
 
-//   method calcNextNeighbour that actually handles the rules of Conways Game of Life.
-//   1. Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.
-//   2. Any live cell with more than three live neighbors dies, as if by overcrowding.
-//   3. Any live cell with two or three live neighbors lives on to the next generation.
-//   4. Any dead cell with exactly three live neighbors becomes a live cell.
     public static void calcNextNeighbour(Board board, Board nextBoard, int ROWS, int COLUMNS) {
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
@@ -57,16 +45,13 @@ public class Life {
                     nextBoard.set(r, c, 1);
                 }
                 else {
-                    nextBoard.set(r, c, 0); // if none of the rules above happens, this is a "failsafe".
+                    nextBoard.set(r, c, 0);
                 }
 
             }
         }
     }
 
-    // the method countNeighbours counts the eight cells around a specific cell.
-    // useful to make sure it doesnt count outside of the bounds of the array and
-    // not to count the specific cell in mind
     public static int countNeighbours(int row, int column, Board board, int ROWS, int COLUMNS) {
         int counter = 0;
 
@@ -81,8 +66,6 @@ public class Life {
         return counter;
     }
 
-    // the method copyCurrentBoardToNext copies the conditions of the current board and transfers it to the next board
-    // that way we can "play" the game and display the future generations of the game.
     public static void copyCurrentBoardToNext(Board board, Board nextBoard, int ROWS, int COLUMNS) {
         for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLUMNS; c++) {
@@ -119,24 +102,6 @@ public class Life {
             calcNextNeighbour(board, nextBoard, ROWS, COLUMNS);
             copyCurrentBoardToNext(board, nextBoard, ROWS, COLUMNS);
         }
-
-//         make this a test later on ?
-//        System.out.println(countNeighbours(0, 0, board) + " live neighbour(s).");
-    }
-
-    /////////////////////////////////
-    public static boolean displayTestBoard(Board board) {
-        for (int r = 0; r < test_rows; r++) {
-            for (int c = 0; c < test_columns; c++) {
-                if (board.get(r, c) == 0) {
-                    System.out.print(".");
-                } else if (board.get(r, c) == 1) {
-                    System.out.print("0");
-                }
-            }
-            System.out.println();
-        }
-        return true;
     }
 
     public static void initTestBoard(Board board) {
@@ -146,20 +111,5 @@ public class Life {
                 board.set(r, c,1);
             }
         }
-    }
-
-    public static int countTestNeighbours(int row, int column, Board board) {
-        int counter = 0;
-
-        for (int r = row - 1; r <= row + 1; r++) {
-            for (int c = column -1; c <= column + 1; c++) {
-
-                if (r >= 0 && r < test_rows && c >= 0 && c < test_columns &&
-                        !(r == row && c == column) && board.get(r, c) == 1) {
-                    counter = counter + 1;
-                }
-            }
-        }
-        return counter;
     }
 }
