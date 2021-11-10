@@ -10,8 +10,7 @@ during the last course meeting.
 ###### Problem Description
 
 This Kata is about calculating the next generation of Conway’s game of life, 
-given any starting position. See http://en.wikipedia.org/wiki/Conway
-%27s_Game_of_Life for background.
+given any starting position. See http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life for background.
 
 You start with a two dimensional grid of cells, where each cell is either alive or 
 dead. In this version of the problem, the grid is finite, and no life can exist off the 
